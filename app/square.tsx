@@ -1,17 +1,25 @@
 import { View, Text, Button, StyleSheet,TextInput} from "react-native";
 import { useState } from "react";
+import { router, useRouter } from "expo-router";
 export default function Square  (){
 const [width,SetWidth] = useState(0)
-const [lengh,setLengh] = useState(0)
+const [lenght,setLenght] = useState(0)
 const [area,setArea] = useState(0)
 
+function calSquare(){
+    let result = width * lenght
+    setArea(result)
+}
     return (
         <View style={styles.container}>
         <Text style={styles.MainTitle}>คำนวนพื้นที่สี่เหลี่ยม</Text>
-        <Button title="ไปหน้าแรก"></Button>
+        
+        <Text> กว้าง {width} ซม. ยาว {lenght}ซม. พื้นที่คือ{area} ตร.ซม </Text>
         <TextInput style={styles.TextInput} placeholder="กรอกความกว่าง" value={width.toString()} onChangeText={(w)=> SetWidth(Number(w))}/>
-        <TextInput style={styles.TextInput} placeholder="กรอกความยาว"/>
-        <Button title="คำนวณ"></Button>
+        <TextInput value={lenght.toString()} onChangeText={(l) => setLenght(Number(l))} style={styles.TextInput} placeholder="กรอกความยาว" />
+        <Button title="คำนวณ" onPress={() => calSquare()}></Button>
+        <Button title="ไปหน้าสาม" onPress={() => router.navigate('/circle')}></Button>
+        <Button title="ไปหน้าแรก" onPress={() => router.navigate('/')}></Button>
         </View>
         
     )
